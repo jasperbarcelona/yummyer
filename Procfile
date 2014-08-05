@@ -1,1 +1,1 @@
-web: python jaspe.py
+web: python feed.py
