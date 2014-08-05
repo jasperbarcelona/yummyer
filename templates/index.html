@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Yummyer</title>
+	<script src="static/js/jquery-1.11.0.min.js"></script>
+	<script src="static/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="static/css/bootstrap.css">
+<style>
+	body{
+		background-image: url('static/images/bg.png');
+		background-size: 100% 100%;
+		background-attachment:fixed;
+		background-repeat: no-repeat;	
+		min-width: 100%;
+		overflow: hidden;
+	}
+	a:hover{
+		cursor: pointer;
+	}
+	#home{		
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 9%;
+		left: 0%;
+		min-width: 700px;
+		
+	}
+	#restos{
+		min-height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 100%;
+		left: 0%;
+		z-index: 99;
+		background-color: #fff;
+		min-width: 90px;
+		overflow: scroll;
+		overflow-x:hidden
+	}
+	#gallery{
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 200%;
+		left: 0%;
+		z-index: 99;
+		background-color: #fff;
+	}
+	#aboutUs{
+		position: fixed;
+		float: left;
+		margin-left: 55px;
+		margin-top: 40px;
+		height:70%;
+		width: 60%;
+	}
+	#twitter{
+		position: fixed;
+		top: 55px;
+		right: 55px;
+		width: 27%;
+		margin-top: 40px;
+	}
+	.navbar-brand{
+		color:#fff !important;
+		font-family: Arial, Helvetica, sans-serif !important;
+		margin-left: 25px !important;
+	}
+	.navbar-right a{
+		color:#fff !important;
+		font-family: Arial, Helvetica, sans-serif !important;
+	}
+
+	
+
+	a{
+		text-decoration: none;
+		color:#fff; 
+	}
+	#brand{
+		float: left;
+		margin-top: 10px;
+		margin-left: 55px;
+		font-size: 22px;	
+	}
+
+	#viewContact{
+		margin-right: 40px;
+	}
+
+	.restoPic{
+		height: 200px;
+		width: 90%;
+		margin-top: 10px;
+		border-radius: 5px;
+	}
+	.picContainer{
+		font-family: Arial, Helvetica, sans-serif;
+		float: left;
+		margin-right: 3%;
+		margin-left: 3.8%;
+		margin-bottom: 30px;
+		height: 260px;
+		width: 18%;
+		border: 1px solid #D2D2D2;
+		border-radius: 5px;
+		background-color: #fff;
+	}
+	#restoContainer{
+		margin-top: 20px;
+		height: 100%;
+		width: 95%;
+		text-align: left;
+	}
+	.restoName{
+		margin-left:6%;
+		font-weight: bold;
+		font-size: 16px;
+	}
+	.restoLoc{
+		margin-left:6%;
+		font-size: 12px; 
+		font-weight: bold;
+	}
+	#restoModal{
+		position: absolute;
+		left: 9.2%;
+		background-color: #fff;
+		height: 100%;
+		width:80%;
+		display: none;
+		z-index: 99;
+	}
+	#overlay{
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		z-index: 1;
+		background-color: #222222;
+		opacity: 0.7;
+		display: none;
+	}
+	#preloader{
+		position: absolute;
+		top: 40%;
+		left: 47%;
+		display: none;
+	}
+	
+</style>
+</head>
+
+<body>	
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Yummyer</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="viewHome">Home</a></li>
+        <li><a id="viewRestos">Restaurants</a></li>
+        <li><a id="viewGallery">Gallery</a></li>
+        <li><a id="viewAbout">About</a></li>
+        <li><a id="viewContact">Contact</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+    
+	<div id="home">
+		<div id="aboutUs">
+			<iframe src="http://player.vimeo.com/video/100227508" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		</div>
+
+		<div id="twitter">
+    		<a class="twitter-timeline" href="https://twitter.com/search?q=%40YummyerTest" data-widget-id="493788235777056770">Tweets about "@YummyerTest"</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+		</div>
+	</div>
+
+
+	<div id="restos">
+		<div id="overlay"></div>
+		<div id="restoModal"><img id="preloader" src="static/images/loading.GIF"></div>
+
+		<center>
+			<div id="restoContainer">
+				<div class="picContainer">	
+					<center>	
+						<div class="restoPic">
+							<img src="static/images/katsu.jpg" alt="..." height="100%" width="100%">
+						</div>
+					</center>
+					<span class="restoName">Crazy Katsu</span><br>
+					<span class="restoLoc">Quezon City</span><br>
+				</div>
+				<div class="picContainer">	
+					<center>	
+						<div class="restoPic">
+							<img src="static/images/katsu.jpg" alt="..." height="100%" width="100%">
+						</div>
+					</center>
+					<span class="restoName">Crazy Katsu</span><br>
+					<span class="restoLoc">Quezon City</span><br>
+				</div>
+				<div class="picContainer">	
+					<center>	
+						<div class="restoPic">
+							<img src="static/images/katsu.jpg" alt="..." height="100%" width="100%">
+						</div>
+					</center>
+					<span class="restoName">Crazy Katsu</span><br>
+					<span class="restoLoc">Quezon City</span><br>
+				</div>
+				<div class="picContainer">	
+					<center>	
+						<div class="restoPic">
+							<img src="static/images/katsu.jpg" alt="..." height="100%" width="100%">
+						</div>
+					</center>
+					<span class="restoName">Crazy Katsu</span><br>
+					<span class="restoLoc">Quezon City</span><br>
+				</div>
+				<div class="picContainer">	
+					<center>	
+						<div class="restoPic">
+							<img src="static/images/katsu.jpg" alt="..." height="100%" width="100%">
+						</div>
+					</center>
+					<span class="restoName">Crazy Katsu</span><br>
+					<span class="restoLoc">Quezon City</span><br>
+				</div>
+			</div>
+
+		</center>
+	</div>
+
+	<div id="gallery">
+		sdv
+	</div>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+	var width = $(window).width();
+	if(width<900 && width>500){
+		$(".picContainer").css("width", "90%");
+		$(".picContainer").css("margin-right", "0%");
+		$(".picContainer").css("margin-left", "5%");
+		$("#restos").css("background-color", "#DADCE0");
+		$("#restos").css("height", "100%");
+		$(".picContainer").css("border", "none");
+		$(".picContainer").css("border-radius", "0px");
+		$(".picContainer").css("margin-bottom", "25px");
+		$(".picContainer").css("height", "500px");
+		$(".restoPic").css("height", "390px");
+		$(".restoPic").css("margin-top", "30px");
+		$(".restoPic").css("margin-bottom", "18px");
+		$(".restoName").css("font-size", "20px");
+		$(".restoLoc").css("font-size", "16px");
+	}
+	else if(width<500){
+		$(".picContainer").css("width", "95%");
+		$(".picContainer").css("margin-right", "0%");
+		$(".picContainer").css("margin-left", "2%");
+		$("#restos").css("background-color", "#DADCE0");
+		$("#restos").css("height", "100%");
+		$(".picContainer").css("border", "none");
+		$(".picContainer").css("border-radius", "0px");
+		$(".picContainer").css("margin-bottom", "15px");
+		$(".picContainer").css("height", "330px");
+		$(".restoPic").css("height", "260px");
+		$(".restoPic").css("margin-top", "15px");
+		$(".restoPic").css("margin-bottom", "5px");
+		$(".restoName").css("font-size", "16px");
+		$(".restoLoc").css("font-size", "12px");
+		$(".navbar-brand").attr("style", "margin-left: 0px !important;");
+
+	}
+	
+$("#viewRestos").click(function(){
+	var height = $(window).height();
+   $('html,body').animate({scrollTop: height-50}, 'slow');
+})
+
+$("#viewHome").click(function(){
+   $('html,body').animate({scrollTop:0}, 'slow');
+})
+
+$("#viewGallery").click(function(){
+	var height = $(window).height();
+   $('html,body').animate({scrollTop: (height*2)-50}, 'slow');  
+})
+
+$(".restoName").click(function(){
+   $("#overlay").show();
+   $("#restoModal").show();
+   $("#preloader").show();
+})
+
+$("#overlay").click(function(){
+   $("#overlay").hide();
+   $("#restoModal").hide();  
+})
+
+$(window).resize(function() {
+	var width = $(window).width();
+	if(width<900 && width>500){
+		$(".picContainer").css("width", "100%");
+		$(".picContainer").css("margin-right", "0%");
+		$(".picContainer").css("margin-left", "0%");
+		$("#restos").css("background-color", "#DADCE0");
+		$(".picContainer").css("border", "none");
+		$(".picContainer").css("border-radius", "0px");
+		$(".picContainer").css("margin-bottom", "10px");
+		$(".picContainer").css("height", "450px");
+		$(".restoPic").css("height", "390px");
+	}
+	else{
+		$(".picContainer").css("width", "18%");
+		$(".picContainer").css("margin-right", "3%");
+		$(".picContainer").css("margin-left", "3.5%");
+		$("#restos").css("background-color", "#fff");
+		$(".picContainer").css("border", "1px solid #D2D2D2");
+		$(".picContainer").css("border-radius", "5px");
+		$(".picContainer").css("margin-bottom", "30px");
+		$(".picContainer").css("height", "260px");
+		$(".restoPic").css("height", "200px");
+	}
+})
+});
+
+</script>
